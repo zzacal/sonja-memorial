@@ -1,2 +1,2 @@
-# sonja-memorial
-Sonja Mnich's memorial website
+# Sonja Mnich's Memorial
+Celebrating the life of Sonja
