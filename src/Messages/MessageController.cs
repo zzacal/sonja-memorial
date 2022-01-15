@@ -21,10 +21,12 @@ public class MessageController : Controller
 
   [HttpPost]
   [Route("/api/message")]
-  public IMessage Post([FromBody] MessageRequest message)
+  public IActionResult Post([FromForm] MessageRequest message)
   {
-    var data = new MessageData(message.Body);
-    _store.Add(data);
-    return data;
+    if(!string.IsNullOrWhiteSpace(message.Body)){
+      var data = new MessageData(message.Body);
+      _store.Add(data);
+    }
+    return Redirect("/");
   }
 }
