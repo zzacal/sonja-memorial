@@ -1,4 +1,4 @@
-namespace sonja_memorial.Models;
+namespace SonjaMemorial.Models;
 
 public class ErrorViewModel
 {

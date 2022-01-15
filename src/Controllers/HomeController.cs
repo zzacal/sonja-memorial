@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using sonja_memorial.Models;
+using SonjaMemorial.Models;
 
-namespace sonja_memorial.Controllers;
+namespace SonjaMemorial.Controllers;
 
 public class HomeController : Controller
 {
