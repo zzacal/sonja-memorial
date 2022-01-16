@@ -1,11 +1,6 @@
 @using SonjaMemorial.Messages
 @model MessageViewModel
 
-@foreach (var item in Model?.Messages ?? new List<MessageData>())
-{
-  <div>@item.Body</div>
-}
-
 @{ 
   if (!(Model?.IsSubmitted ?? false)) {
     @using (Html.BeginForm("Index", "Home", null, FormMethod.Post))
@@ -17,11 +12,25 @@
                     document.getElementById('message-body-count').innerHTML = `${this.value.length}/${@Model.Limit}`;
                 };
             </script>
-            <span id="message-body-count">0/@Model.Limit</span>
+            <span id="message-body-count" class="message-body-count">0/@Model.Limit</span>
             <button class="btn btn-primary message-submit">Send</button>
         </div>
     }
   } else {
-    @Model.IsSubmitted
+    <div class="message-form">
+        <textarea disabled="true" type="text" id="message-body" name="Body" class="message-field" value="" maxlength="@Model.Limit"></textarea>
+        <span id="message-body-count" class="message-body-count">0/@Model.Limit</span>
+        <a class="btn btn-success message-submit" href="/">✅ Sent</a>
+    </div>
   }
 }
+
+<div class="message-list">
+  @foreach (var item in Model?.Messages.Reverse() ?? new List<MessageData>())
+  {
+    <div class="message-card">
+      <div class="message-created">@item.Created.ToString("MM/dd/yyyy hh:mm")</div>
+      <div class="message-body">@item.Body</div>
+    </div>
+  }
+</div>
