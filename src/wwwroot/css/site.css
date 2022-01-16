@@ -56,3 +56,15 @@ body {
 .submit-success {
   margin-top: 2em;
 }
+
+.banner-image img {
+  padding: .5em .5em 1em;
+}
+
+.memories-story {
+  margin-top: 2em;
+}
+
+.memories-story .row {
+  margin-top: 2em;
+}
