@@ -1,21 +1,27 @@
 @using SonjaMemorial.Messages
-@model IEnumerable<MessageViewModel>
+@model MessageViewModel
 
-@foreach (var item in Model ?? new List<MessageViewModel>())
+@foreach (var item in Model?.Messages ?? new List<MessageData>())
 {
-    <div>@item.Body</div>
+  <div>@item.Body</div>
 }
 
-@using (Html.BeginForm("Post", "Message", null, FormMethod.Post))
-{
-    <div class="message-form">
-        <textarea type="text" id="message-body" name="Body" class="message-field" value="" maxlength="255"></textarea>
-        <script>
-            document.getElementById('message-body').onkeyup = function () {
-                document.getElementById('message-body-count').innerHTML = `${this.value.length}/255`;
-            };
-        </script>
-        <span id="message-body-count">0/255</span>
-        <button class="btn btn-primary message-submit">Send</button>
-    </div>
+@{ 
+  if (!(Model?.IsSubmitted ?? false)) {
+    @using (Html.BeginForm("Index", "Home", null, FormMethod.Post))
+    {
+        <div class="message-form">
+            <textarea type="text" id="message-body" name="Body" class="message-field" value="" maxlength="@Model.Limit"></textarea>
+            <script>
+                document.getElementById('message-body').onkeyup = function () {
+                    document.getElementById('message-body-count').innerHTML = `${this.value.length}/${@Model.Limit}`;
+                };
+            </script>
+            <span id="message-body-count">0/@Model.Limit</span>
+            <button class="btn btn-primary message-submit">Send</button>
+        </div>
+    }
+  } else {
+    @Model.IsSubmitted
+  }
 }
