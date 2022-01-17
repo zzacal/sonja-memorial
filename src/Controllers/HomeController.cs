@@ -44,9 +44,11 @@ public class HomeController : Controller
     {
       var data = new MessageData(message.Body);
       _messages.Add(data);
+    } else {
+      return RedirectToAction("Index", null, null, "messages");
     }
 		
-		return RedirectToAction("Done");
+		return RedirectToAction("Done", null, null, "messages");
   }
 
   public IActionResult Privacy()
