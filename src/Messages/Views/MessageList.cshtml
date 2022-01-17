@@ -11,10 +11,10 @@
         @using (Html.BeginForm("Index", "Home", null, FormMethod.Post))
         {
             <div class="message-form">
-                <textarea type="text" id="message-body" name="Body" class="message-field" value="" maxlength="@Model.Limit"></textarea>
+                <textarea type="text" id="message-body" name="Body" class="message-field" value="" maxlength="@Model?.Limit ?? 0"></textarea>
                 <script>
                     document.getElementById('message-body').onkeyup = function () {
-                        document.getElementById('message-body-count').innerHTML = `${this.value.length}/${@Model.Limit}`;
+                        document.getElementById('message-body-count').innerHTML = `${this.value.length}/${@Model?.Limit ?? 0}`;
                     };
                 </script>
                 <div class="d-flex justify-content-between">

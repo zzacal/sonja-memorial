@@ -16,21 +16,21 @@ public class HomeController : Controller
     _messages = messages;
   }
 
-  public IActionResult Index()
+  public async Task<IActionResult> Index()
   {
     var model = new HomeViewModel
 		{
-			Messages = _messages.GetAll().Select(m => new MessageData(m.Body)),
+			Messages = (await _messages.GetAll()).Select(m => new MessageData(m.Body)),
 		};
     return View(model);
   }
 	
   [Route("/sent")]
-  public IActionResult Done()
+  public async Task<IActionResult> Done()
   {
     var model = new HomeViewModel
 		{
-			Messages = _messages.GetAll().Select(m => new MessageData(m.Body)),
+			Messages = (await _messages.GetAll()).Select(m => new MessageData(m.Body)),
 			IsSubmitted = true
 		};
     return View("Index", model);
@@ -38,12 +38,12 @@ public class HomeController : Controller
 
   [HttpPost]
   [Route("/")]
-  public IActionResult Index([FromForm] MessageRequest message)
+  public async Task<IActionResult> Index([FromForm] MessageRequest message)
   {
     if (!string.IsNullOrWhiteSpace(message.Body))
     {
       var data = new MessageData(message.Body);
-      _messages.Add(data);
+      await _messages.Add(data);
     } else {
       return RedirectToAction("Index", null, null, "messages");
     }

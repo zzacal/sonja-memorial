@@ -1,5 +1,5 @@
 namespace SonjaMemorial.Messages;
 public interface IMessageStore {
-    void Add(MessageData message);
-    IEnumerable<MessageData> GetAll();
+    Task Add(MessageData message);
+    Task<IEnumerable<MessageData>> GetAll();
 }

@@ -1,6 +1,8 @@
 namespace SonjaMemorial.Messages;
-public class MessageData: IMessage {
-  public MessageData(string body) {
+public class MessageData : IMessage
+{
+  public MessageData(string body)
+  {
     Body = body;
     Created = DateTime.Now;
   }
