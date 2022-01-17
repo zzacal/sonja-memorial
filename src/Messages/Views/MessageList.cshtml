@@ -1,29 +1,38 @@
 @using SonjaMemorial.Messages
 @model MessageViewModel
-
-@{ 
-  if (!(Model?.IsSubmitted ?? false)) {
-    @using (Html.BeginForm("Index", "Home", null, FormMethod.Post))
-    {
+<hr />
+<div class="row">
+  <h5 class="text-center">Messages</h5>
+</div>
+<div class="row justify-content-center">
+  <div class="col-11 col-sm-8 col-md-6 col-lg-5">
+    @{ 
+      if (!(Model?.IsSubmitted ?? false)) {
+        @using (Html.BeginForm("Index", "Home", null, FormMethod.Post))
+        {
+            <div class="message-form">
+                <textarea type="text" id="message-body" name="Body" class="message-field" value="" maxlength="@Model.Limit"></textarea>
+                <script>
+                    document.getElementById('message-body').onkeyup = function () {
+                        document.getElementById('message-body-count').innerHTML = `${this.value.length}/${@Model.Limit}`;
+                    };
+                </script>
+                <div class="d-flex justify-content-between">
+                  <div id="message-body-count" class="message-body-count">0/@Model.Limit</div>
+                  <button class="btn btn-primary">Send</button>
+                </div>
+            </div>
+        }
+      } else {
         <div class="message-form">
-            <textarea type="text" id="message-body" name="Body" class="message-field" value="" maxlength="@Model.Limit"></textarea>
-            <script>
-                document.getElementById('message-body').onkeyup = function () {
-                    document.getElementById('message-body-count').innerHTML = `${this.value.length}/${@Model.Limit}`;
-                };
-            </script>
+            <textarea disabled="true" type="text" id="message-body" name="Body" class="message-field" value="" maxlength="@Model.Limit"></textarea>
             <span id="message-body-count" class="message-body-count">0/@Model.Limit</span>
-            <button class="btn btn-primary message-submit">Send</button>
+            <a class="btn btn-success message-submit" href="/">✅ Sent</a>
         </div>
+      }
     }
-  } else {
-    <div class="message-form">
-        <textarea disabled="true" type="text" id="message-body" name="Body" class="message-field" value="" maxlength="@Model.Limit"></textarea>
-        <span id="message-body-count" class="message-body-count">0/@Model.Limit</span>
-        <a class="btn btn-success message-submit" href="/">✅ Sent</a>
-    </div>
-  }
-}
+  </div>
+</div>
 
 <div class="message-list">
   @foreach (var item in Model?.Messages.Reverse() ?? new List<MessageData>())
