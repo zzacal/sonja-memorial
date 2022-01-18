@@ -3,8 +3,14 @@ using SonjaMemorial.Messages;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
-builder.Services.AddSingleton<IMessageStore>(new MongoMessageStore(Environment.GetEnvironmentVariable("MESSAGES_MONGO_CONNECTION_STRING")!, Environment.GetEnvironmentVariable("MESSAGES_MONGO_DB_NAME")!, Environment.GetEnvironmentVariable("MESSAGES_MONGO_COLLECTION_NAME")!));
+if(Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
+{
+    builder.Services.AddSingleton<IMessageStore, InMemoryMessageStore>();
+}
+else
+{
+    builder.Services.AddSingleton<IMessageStore>(new MongoMessageStore(Environment.GetEnvironmentVariable("MESSAGES_MONGO_CONNECTION_STRING")!, Environment.GetEnvironmentVariable("MESSAGES_MONGO_DB_NAME")!, Environment.GetEnvironmentVariable("MESSAGES_MONGO_COLLECTION_NAME")!));
+}
 
 builder.Services.AddControllersWithViews();
 
