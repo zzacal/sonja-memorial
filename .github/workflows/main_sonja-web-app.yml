@@ -53,5 +53,5 @@ jobs:
         with:
           app-name: 'sonja-web-app'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_08F9F55A62F44065B09B8DF783DB88A0 }}
+          publish-profile: ${{ secrets.PARTNER_WEBAPP_PUB }}
           package: .
