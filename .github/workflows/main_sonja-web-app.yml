@@ -51,7 +51,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'sonja'
+          app-name: 'sonja-web-app'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.PARTNER_WEBAPP_PUB }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_08F9F55A62F44065B09B8DF783DB88A0 }}
           package: .
