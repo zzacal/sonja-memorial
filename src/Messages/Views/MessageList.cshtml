@@ -38,7 +38,7 @@
   @foreach (var item in Model?.Messages.Reverse() ?? new List<MessageData>())
   {
     <div class="message-card">
-      <time time='@item.Created.ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz")' class="message-created">@item.Created.ToString("MM/dd/yyyy hh:mm")</time>
+      <time time='@item.Created.ToString("yyyy-MM-ddTHH:mm:ssZ")' class="message-created">@item.Created.ToString("MM/dd/yyyy hh:mm")</time>
       <div class="message-body">@item.Body</div>
     </div>
   }
