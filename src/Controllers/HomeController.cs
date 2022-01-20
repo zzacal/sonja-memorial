@@ -43,7 +43,7 @@ public class HomeController : Controller
   {
     if (!string.IsNullOrWhiteSpace(message.Body))
     {
-      var data = new MessageData(message.Body, DateTime.Now);
+      var data = new MessageData(message.Body, DateTime.UtcNow);
       await _messages.Add(data);
     } else {
       return RedirectToAction("Index", null, null, "messages");
