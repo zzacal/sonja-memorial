@@ -28,11 +28,10 @@ public class MongoMessageStore : IMessageStore
 }
 
 public class MongoMessageData : MessageData {
-  public MongoMessageData(string body) : base(body) {
+  public MongoMessageData(string body, DateTime created) : base(body, created) {
   }
 
-  public MongoMessageData(MessageData data) : base(data.Body) {
-    Created = data.Created;
+  public MongoMessageData(MessageData data) : base(data.Body, data.Created) {
   }
 
   [BsonId]

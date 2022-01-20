@@ -20,7 +20,7 @@ public class HomeController : Controller
   {
     var model = new HomeViewModel
 		{
-			Messages = (await _messages.GetAll()).Select(m => new MessageData(m.Body)),
+			Messages = (await _messages.GetAll()).Select(m => new MessageData(m.Body, m.Created)),
 		};
     return View(model);
   }
@@ -28,9 +28,10 @@ public class HomeController : Controller
   [Route("/sent")]
   public async Task<IActionResult> Done()
   {
+    var messages = await _messages.GetAll();
     var model = new HomeViewModel
 		{
-			Messages = (await _messages.GetAll()).Select(m => new MessageData(m.Body)),
+			Messages = messages.Select(m => new MessageData(m.Body, m.Created)),
 			IsSubmitted = true
 		};
     return View("Index", model);
@@ -42,7 +43,7 @@ public class HomeController : Controller
   {
     if (!string.IsNullOrWhiteSpace(message.Body))
     {
-      var data = new MessageData(message.Body);
+      var data = new MessageData(message.Body, DateTime.Now);
       await _messages.Add(data);
     } else {
       return RedirectToAction("Index", null, null, "messages");
