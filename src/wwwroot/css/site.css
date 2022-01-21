@@ -17,9 +17,13 @@ body {
   margin-bottom: 60px;
 }
 
-/* .message-form {
-  width:250px;
-} */
+.top-space-0_5 {
+  margin-top: 0.5em;
+}
+
+.top-space {
+  margin-top: 3em;
+}
 
 .message-field {
   resize: none;
