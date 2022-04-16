@@ -9,7 +9,6 @@ public class MongoMessageStore : IMessageStore
   IMongoCollection<MongoMessageData> _collection;
   public MongoMessageStore(string connectionString, string databaseName, string collectionName)
   {
-    Console.WriteLine($"connectionString: {connectionString}\ndatabaseName: {databaseName}\ncollectionName: {collectionName}");
     var settings = MongoClientSettings.FromConnectionString(connectionString);
     var client = new MongoClient(settings);
     _db = client.GetDatabase(databaseName);

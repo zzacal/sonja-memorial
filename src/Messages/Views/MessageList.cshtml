@@ -2,36 +2,7 @@
 @model MessageViewModel
 <hr class="top-space" />
 <div class="row">
-  <h5 class="text-center"><a id="messages">✨ Share a memory ✨</a></h5>
-</div>
-<div class="row justify-content-center">
-  <div class="col-11 col-sm-8 col-md-6 col-lg-5">
-    @{ 
-      if (!(Model?.IsSubmitted ?? false)) {
-        @using (Html.BeginForm("Index", "Home", null, FormMethod.Post))
-        {
-            <div class="message-form">
-                <textarea type="text" id="message-body" name="Body" class="message-field" value="" maxlength="@Model?.Limit ?? 0"></textarea>
-                <script>
-                    document.getElementById('message-body').onkeyup = function () {
-                        document.getElementById('message-body-count').innerHTML = `${this.value.length}/${@Model?.Limit ?? 0}`;
-                    };
-                </script>
-                <div class="d-flex justify-content-between">
-                  <div id="message-body-count" class="message-body-count">0/@Model.Limit</div>
-                  <button class="btn btn-primary">Share ❤️</button>
-                </div>
-            </div>
-        }
-      } else {
-        <div class="message-form">
-            <textarea disabled="true" type="text" id="message-body" name="Body" class="message-field" value="" maxlength="@Model.Limit"></textarea>
-            <span id="message-body-count" class="message-body-count">0/@Model.Limit</span>
-            <a class="btn btn-success message-submit" href="/">✅ Shared</a>
-        </div>
-      }
-    }
-  </div>
+  <h5 class="text-center"><a id="messages">✨ shared memories ✨</a></h5>
 </div>
 
 <div class="message-list">
